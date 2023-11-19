@@ -1,0 +1,5 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/home/jaikhurana/Developer/Art/monoLearn/MyGame/Content/crosshairs.png","/home/jaikhurana/Developer/Art/monoLearn/MyGame/Content/bin/DesktopGL/Content/crosshairs.xnb","TextureProcessor","Texture2DContent",1892,10085,0.1780322
+"/home/jaikhurana/Developer/Art/monoLearn/MyGame/Content/galleryFont.spritefont","/home/jaikhurana/Developer/Art/monoLearn/MyGame/Content/bin/DesktopGL/Content/galleryFont.xnb","FontDescriptionProcessor","SpriteFontContent",2065,70687,0.1905345
+"/home/jaikhurana/Developer/Art/monoLearn/MyGame/Content/sky.png","/home/jaikhurana/Developer/Art/monoLearn/MyGame/Content/bin/DesktopGL/Content/sky.xnb","TextureProcessor","Texture2DContent",1079607,9216085,0.4231945
+"/home/jaikhurana/Developer/Art/monoLearn/MyGame/Content/target.png","/home/jaikhurana/Developer/Art/monoLearn/MyGame/Content/bin/DesktopGL/Content/target.xnb","TextureProcessor","Texture2DContent",3395,32485,0.0052091
