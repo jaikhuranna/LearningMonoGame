@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -22,6 +21,7 @@ public class Game1 : Game
     private int score = 0;
 
     private bool mRelease = true;
+    private int leway = 10; 
     
     private MouseState mState;
     public Game1()
@@ -57,7 +57,15 @@ public class Game1 : Game
         switch (mState.LeftButton)
         {
             case ButtonState.Pressed when mRelease == true:
-                score++;
+                float mouseTargetDistance = Vector2.Distance(targetPosition, mState.Position.ToVector2());
+                if (mouseTargetDistance <= targetRadius + leway)
+                { 
+                    score++;
+                    Random rand = new Random();
+
+                    targetPosition.X = rand.Next(targetRadius , _graphics.PreferredBackBufferWidth - targetRadius);
+                    targetPosition.Y = rand.Next(targetRadius , _graphics.PreferredBackBufferHeight - targetRadius);
+                }
                 mRelease = false;
                 break;
             case ButtonState.Released:
@@ -75,7 +83,7 @@ public class Game1 : Game
         _spriteBatch.Begin();
         _spriteBatch.Draw(backroundSprite, new Vector2(0,0), Color.White);
         _spriteBatch.DrawString(gameFont, score.ToString(), new Vector2(100, 100), Color.White);
-        _spriteBatch.Draw(targetSprite, targetPosition, Color.White);
+        _spriteBatch.Draw(targetSprite, new Vector2(targetPosition.X - targetRadius, targetPosition.Y - targetRadius), Color.White);
         _spriteBatch.End();
         
         base.Draw(gameTime);
