@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Diagnostics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -6,6 +8,7 @@ namespace MyGame;
 
 public class Game1 : Game
 {
+    //Declarations
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
@@ -13,6 +16,14 @@ public class Game1 : Game
     private Texture2D crosshairsSprite;
     private Texture2D backroundSprite;
     private SpriteFont gameFont;
+    
+    private Vector2 targetPosition = new Vector2(300, 300);
+    private const int targetRadius = 45;
+    private int score = 0;
+
+    private bool mRelease = true;
+    
+    private MouseState mState;
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -41,8 +52,18 @@ public class Game1 : Game
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
-        // TODO: Add your update logic here
+        mState = Mouse.GetState();
+        
+        switch (mState.LeftButton)
+        {
+            case ButtonState.Pressed when mRelease == true:
+                score++;
+                mRelease = false;
+                break;
+            case ButtonState.Released:
+                mRelease = true;
+                break;
+        }
 
         base.Update(gameTime);
     }
@@ -53,8 +74,10 @@ public class Game1 : Game
         
         _spriteBatch.Begin();
         _spriteBatch.Draw(backroundSprite, new Vector2(0,0), Color.White);
-        _spriteBatch.DrawString(gameFont, "Test Message", new Vector2(100, 100), Color.White);
+        _spriteBatch.DrawString(gameFont, score.ToString(), new Vector2(100, 100), Color.White);
+        _spriteBatch.Draw(targetSprite, targetPosition, Color.White);
         _spriteBatch.End();
+        
         base.Draw(gameTime);
     }
 }
